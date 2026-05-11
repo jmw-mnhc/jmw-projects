@@ -9,7 +9,15 @@ import {
 
 function ProjectCard({ project }: { project: Project }) {
   const inner = (
-    <article className="group flex h-full flex-col rounded-2xl border border-[#eceae3] bg-white p-6 transition hover:border-[#0d8b85]/40 hover:shadow-[0_8px_24px_-12px_rgba(13,139,133,0.18)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#eceae3] bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#22d3c4]/60 hover:shadow-[0_20px_60px_-15px_rgba(34,211,196,0.35)]">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(120%_60%_at_50%_0%,rgba(34,211,196,0.18),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -top-px left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#22d3c4] to-transparent transition-all duration-500 group-hover:w-3/4"
+      />
       <div className="flex items-baseline justify-between gap-2">
         <h3 className="text-lg font-medium text-[#0f1419]">
           {project.name}
@@ -96,7 +104,13 @@ export default function Home() {
   return (
     <>
       <Hero
-        title="JMW Projects builds tools for the most important problems in healthcare, real estate, and community."
+        title={
+          <>
+            <span className="gradient-shimmer">JMW Projects</span> builds tools
+            for the most important problems in healthcare, real estate, and
+            community.
+          </>
+        }
         subtitle="The portfolio of Jonathan Malta-Weingard. Based in Berkeley, California."
         primaryCta={{ href: "#projects", label: "See the projects" }}
         secondaryCta={{ href: "#contact", label: "Get in touch" }}

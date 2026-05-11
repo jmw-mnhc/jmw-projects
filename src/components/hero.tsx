@@ -7,7 +7,7 @@ export function Hero({
   primaryCta,
   secondaryCta,
 }: {
-  title: string;
+  title: React.ReactNode;
   subtitle: string;
   primaryCta?: { href: string; label: string };
   secondaryCta?: { href: string; label: string };

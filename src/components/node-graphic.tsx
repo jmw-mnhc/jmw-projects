@@ -81,6 +81,10 @@ export function NodeGraphic({ className = "" }: { className?: string }) {
           <stop offset="60%" stopColor="#0d8b85" stopOpacity="0.05" />
           <stop offset="100%" stopColor="#0d8b85" stopOpacity="0" />
         </radialGradient>
+        <linearGradient id="p-comet-trail" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#22d3c4" stopOpacity="0" />
+        </linearGradient>
         <filter id="p-glow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="3.5" result="blur" />
           <feMerge>
@@ -176,6 +180,19 @@ export function NodeGraphic({ className = "" }: { className?: string }) {
         <circle cx="240" cy="240" r="36" fill="url(#p-orb-glow)" filter="url(#p-glow-strong)" />
         <circle cx="240" cy="240" r="12" fill="url(#p-orb-core)" />
         <circle cx="240" cy="240" r="18" stroke="#22d3c4" strokeOpacity="0.5" strokeWidth="1" fill="none" />
+      </g>
+
+      <g style={{ animation: "comet-1 17s linear infinite", animationDelay: "1s" }}>
+        <line x1="0" y1="0" x2="-26" y2="0" stroke="url(#p-comet-trail)" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="0" cy="0" r="2.2" fill="#ffffff" filter="url(#p-glow-strong)" />
+      </g>
+      <g style={{ animation: "comet-2 23s linear infinite", animationDelay: "6s" }}>
+        <line x1="0" y1="0" x2="-30" y2="0" stroke="url(#p-comet-trail)" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="0" cy="0" r="2" fill="#a7f3eb" filter="url(#p-glow-strong)" />
+      </g>
+      <g style={{ animation: "comet-3 31s linear infinite", animationDelay: "13s" }}>
+        <line x1="0" y1="0" x2="-24" y2="0" stroke="url(#p-comet-trail)" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="0" cy="0" r="2.4" fill="#fcd34d" filter="url(#p-glow-strong)" />
       </g>
     </svg>
   );
