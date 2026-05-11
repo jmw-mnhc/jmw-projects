@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f1419;
+  --muted: #5b6470;
+  --border: #e7e7e3;
+  --surface: #faf9f6;
+  --accent: #0d8b85;
+  --accent-deep: #0a6d68;
+  --accent-soft: #e7f4f3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@keyframes orbit-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes pulse-orb {
+  0%, 100% { opacity: 0.85; transform: scale(1); transform-origin: 240px 240px; }
+  50% { opacity: 1; transform: scale(1.06); transform-origin: 240px 240px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="orbit-cw"],
+  [style*="orbit-ccw"],
+  [style*="twinkle"],
+  [style*="pulse-orb"] {
+    animation: none !important;
+  }
+}
