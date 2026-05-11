@@ -1,14 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f1419;
-  --muted: #5b6470;
-  --border: #e7e7e3;
-  --surface: #faf9f6;
-  --accent: #0d8b85;
-  --accent-deep: #0a6d68;
-  --accent-soft: #e7f4f3;
+  --background: #fafaf6;
+  --paper: #ffffff;
+  --surface-warm: #f5efe1;
+  --surface-cool: #eef4f3;
+  --surface-deep: #0a1419;
+
+  --foreground: #0a1419;
+  --muted: #4a5560;
+  --muted-soft: #6f7a86;
+  --inverse: #f6f1e3;
+
+  --border: #e8e1d0;
+  --border-warm: #ddd3bb;
+  --border-cool: #d8e0df;
+
+  --accent: #0e7c75;
+  --accent-deep: #0a5e58;
+  --accent-bright: #22d3c4;
+  --accent-mint: #5eead4;
+  --accent-glow: #67e8f9;
+
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+  --accent-gold: #fcd34d;
 }
 
 @theme inline {
@@ -24,6 +40,11 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(34, 211, 196, 0.25);
+  color: var(--accent-deep);
 }
 
 @keyframes orbit-cw {
@@ -75,17 +96,29 @@ body {
 .gradient-shimmer {
   background-image: linear-gradient(
     90deg,
-    #0a6d68 0%,
+    #0a5e58 0%,
     #22d3c4 25%,
-    #67e8f9 50%,
+    #5eead4 50%,
     #22d3c4 75%,
-    #0a6d68 100%
+    #0a5e58 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: shimmer 8s ease-in-out infinite;
+}
+
+.btn-primary {
+  background-image: linear-gradient(180deg, #0e8c84 0%, #0a5e58 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 6px 16px -6px rgba(14, 124, 117, 0.55);
+  transition: all 200ms ease;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(180deg, #11a098 0%, #0e7c75 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 12px 28px -10px rgba(14, 124, 117, 0.7);
+  transform: translateY(-1px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,5 +132,8 @@ body {
   }
   .gradient-shimmer {
     background-position: 25% 50%;
+  }
+  .btn-primary:hover {
+    transform: none;
   }
 }
