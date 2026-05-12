@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Mark } from "@/components/mark";
@@ -11,6 +11,8 @@ const links = [
   { href: "#about", label: "About" },
   { href: "#writing", label: "Writing" },
 ];
+
+const JMW_OS_URL = "https://jmwos.vercel.app";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -40,6 +42,15 @@ export function Nav() {
           ))}
         </div>
         <div className="flex items-center gap-2">
+          <a
+            href={JMW_OS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden items-center gap-1.5 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1.5 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:inline-flex"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            JMW OS
+          </a>
           <ThemeToggle />
           <a
             href="#contact"
@@ -74,6 +85,16 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={JMW_OS_URL}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)]"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            JMW OS
+          </a>
           <a
             href="#contact"
             onClick={() => setOpen(false)}
