@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { Hero } from "@/components/hero";
+import { Marquee } from "@/components/marquee";
 import { StatStrip } from "@/components/stat-strip";
 import {
   STATUS_LABELS,
@@ -124,6 +125,19 @@ export default function Home() {
           { label: "Live", value: String(liveCount), caption: "Shipping to real users" },
           { label: "Building", value: String(buildingCount), caption: "Active this quarter" },
           { label: "Research", value: String(researchCount), caption: "Scoping next bets" },
+        ]}
+      />
+
+      <Marquee
+        items={[
+          { label: "Now building", value: "JMW Dealflow · acquisition intelligence", tone: "live" },
+          { label: "Marketplace", value: "FQHC Talent Exchange · clinician coverage", tone: "accent" },
+          { label: "Live", value: "Nasim Realty · Bay Area boutique", tone: "default" },
+          { label: "Atlas", value: "Berkeley Bungalow Map · historic homes", tone: "default" },
+          { label: "B2B", value: "Global HR Navigator · cross-border compliance", tone: "accent" },
+          { label: "Education", value: "PSS Training App · peer support modules", tone: "default" },
+          { label: "Local", value: "Parent Network · neighborhood directory", tone: "default" },
+          { label: "Latest deploy", value: "May 12 · constellation refresh", tone: "live" },
         ]}
       />
 

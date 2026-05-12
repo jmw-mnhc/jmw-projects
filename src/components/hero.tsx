@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NodeGraphic } from "@/components/node-graphic";
+import { Spotlight } from "@/components/spotlight";
 
 export function Hero({
   title,
@@ -13,11 +14,12 @@ export function Hero({
   secondaryCta?: { href: string; label: string };
 }) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-[var(--border)] bg-[var(--background)]">
+    <section className="group/hero relative isolate overflow-hidden border-b border-[var(--border)] bg-[var(--background)]">
       <div
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(80%_60%_at_72%_28%,var(--hero-glow-1),transparent_60%),radial-gradient(60%_55%_at_12%_88%,var(--hero-glow-2),transparent_72%),radial-gradient(35%_30%_at_50%_50%,var(--hero-glow-3),transparent_70%)]"
       />
+      <Spotlight />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-100"
