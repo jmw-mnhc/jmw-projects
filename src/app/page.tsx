@@ -13,7 +13,7 @@ const featuredCallouts = [
     title: "Introducing JMW OS",
     description:
       "A personal operating system. One dashboard over every project I'm running — daily briefs, action checklists, the hub linking out to all 15 live sites. Built on Claude Code.",
-    cta: { href: "https://jmwos.vercel.app", label: "Open JMW OS" },
+    cta: { href: "/os", label: "Open JMW OS" },
   },
   {
     eyebrow: "Building",
