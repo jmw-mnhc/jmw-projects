@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  /* Light palette (default values) */
   --background: #fafaf6;
   --paper: #ffffff;
   --surface-warm: #f5efe1;
@@ -15,6 +18,7 @@
   --border: #e8e1d0;
   --border-warm: #ddd3bb;
   --border-cool: #d8e0df;
+  --border-strong: #cdd9d7;
 
   --accent: #0e7c75;
   --accent-deep: #0a5e58;
@@ -25,6 +29,74 @@
   --accent-amber: #d97706;
   --accent-rose: #e11d48;
   --accent-gold: #fcd34d;
+
+  --hero-glow-1: rgba(34, 211, 196, 0.2);
+  --hero-glow-2: rgba(14, 124, 117, 0.12);
+  --hero-glow-3: rgba(252, 211, 77, 0.05);
+
+  --card-glow: rgba(34, 211, 196, 0.18);
+  --card-shadow: 0 20px 60px -15px rgba(34, 211, 196, 0.35);
+
+  --btn-from: #0e8c84;
+  --btn-to: #0a5e58;
+  --btn-hover-from: #11a098;
+  --btn-hover-to: #0e7c75;
+  --btn-shadow: 0 6px 16px -6px rgba(14, 124, 117, 0.55);
+  --btn-shadow-hover: 0 12px 28px -10px rgba(14, 124, 117, 0.7);
+
+  --footer-bg: #0a1419;
+  --footer-text: #cfd6dd;
+  --footer-muted: #8e98a4;
+  --footer-link: #e6eef4;
+  --footer-accent: #5eead4;
+}
+
+.dark {
+  --background: #060e1a;
+  --paper: #0a1626;
+  --surface-warm: #14140e;
+  --surface-cool: #0a1822;
+  --surface-deep: #020610;
+
+  --foreground: #e8f0fb;
+  --muted: #94a3b8;
+  --muted-soft: #64748b;
+  --inverse: #0a1419;
+
+  --border: #1a2538;
+  --border-warm: #2a2618;
+  --border-cool: #1a2a2e;
+  --border-strong: #2a3548;
+
+  --accent: #22d3c4;
+  --accent-deep: #0e7c75;
+  --accent-bright: #5eead4;
+  --accent-mint: #a7f3eb;
+  --accent-glow: #67e8f9;
+
+  --accent-amber: #fbbf24;
+  --accent-rose: #fb7185;
+  --accent-gold: #fcd34d;
+
+  --hero-glow-1: rgba(34, 211, 196, 0.18);
+  --hero-glow-2: rgba(14, 124, 117, 0.25);
+  --hero-glow-3: rgba(251, 191, 36, 0.06);
+
+  --card-glow: rgba(34, 211, 196, 0.28);
+  --card-shadow: 0 20px 60px -15px rgba(34, 211, 196, 0.45);
+
+  --btn-from: #14b8a6;
+  --btn-to: #0e7c75;
+  --btn-hover-from: #2dd4bf;
+  --btn-hover-to: #14b8a6;
+  --btn-shadow: 0 6px 18px -4px rgba(34, 211, 196, 0.6);
+  --btn-shadow-hover: 0 14px 30px -8px rgba(34, 211, 196, 0.75);
+
+  --footer-bg: #020610;
+  --footer-text: #94a3b8;
+  --footer-muted: #475569;
+  --footer-link: #e2e8f0;
+  --footer-accent: #5eead4;
 }
 
 @theme inline {
@@ -32,6 +104,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -43,8 +123,8 @@ body {
 }
 
 ::selection {
-  background: rgba(34, 211, 196, 0.25);
-  color: var(--accent-deep);
+  background: color-mix(in oklab, var(--accent-bright) 25%, transparent);
+  color: var(--accent);
 }
 
 @keyframes orbit-cw {
@@ -93,14 +173,29 @@ body {
   50% { background-position: 100% 50%; }
 }
 
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -12px); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-18px, 14px); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(14px, 18px); }
+}
+
 .gradient-shimmer {
   background-image: linear-gradient(
     90deg,
-    #0a5e58 0%,
-    #22d3c4 25%,
-    #5eead4 50%,
-    #22d3c4 75%,
-    #0a5e58 100%
+    var(--accent-deep) 0%,
+    var(--accent-bright) 25%,
+    var(--accent-mint) 50%,
+    var(--accent-bright) 75%,
+    var(--accent-deep) 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -110,14 +205,14 @@ body {
 }
 
 .btn-primary {
-  background-image: linear-gradient(180deg, #0e8c84 0%, #0a5e58 100%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 6px 16px -6px rgba(14, 124, 117, 0.55);
+  background-image: linear-gradient(180deg, var(--btn-from) 0%, var(--btn-to) 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, var(--btn-shadow);
   transition: all 200ms ease;
 }
 
 .btn-primary:hover {
-  background-image: linear-gradient(180deg, #11a098 0%, #0e7c75 100%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 12px 28px -10px rgba(14, 124, 117, 0.7);
+  background-image: linear-gradient(180deg, var(--btn-hover-from) 0%, var(--btn-hover-to) 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, var(--btn-shadow-hover);
   transform: translateY(-1px);
 }
 
@@ -127,6 +222,7 @@ body {
   [style*="twinkle"],
   [style*="pulse-orb"],
   [style*="comet-"],
+  [style*="drift-"],
   .gradient-shimmer {
     animation: none !important;
   }

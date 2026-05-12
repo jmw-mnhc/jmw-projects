@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { ThemeScript } from "@/components/theme-script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,9 +35,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-[#fafaf6] text-[#0a1419]">
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
         <ScrollProgress />
         <Nav />
         {children}
