@@ -2,6 +2,7 @@
 
 import { Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Mark } from "@/components/mark";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -16,9 +17,13 @@ const links = [
 const JMW_OS_URL = "/os";
 
 export function Nav() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   // Only operators who have already authenticated into /os see the pill.
   const [showOS, setShowOS] = useState(false);
+
+  // The OS routes get their own chrome (OS sidebar). Hide the portfolio nav.
+  if (pathname?.startsWith("/os")) return null;
 
   useEffect(() => {
     try {
