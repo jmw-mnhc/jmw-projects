@@ -75,6 +75,7 @@ export default function Home() {
 
       <Marquee
         items={[
+          { label: "Just shipped", value: "JMW OS · personal operating system", tone: "live" },
           { label: "Now building", value: "JMW Dealflow · acquisition intelligence", tone: "live" },
           { label: "Marketplace", value: "FQHC Talent Exchange · clinician coverage", tone: "accent" },
           { label: "Live", value: "Nasim Realty · Bay Area boutique", tone: "default" },
@@ -82,7 +83,7 @@ export default function Home() {
           { label: "B2B", value: "Global HR Navigator · cross-border compliance", tone: "accent" },
           { label: "Education", value: "PSS Training App · peer support modules", tone: "default" },
           { label: "Local", value: "Parent Network · neighborhood directory", tone: "default" },
-          { label: "Latest deploy", value: "May 12 · constellation refresh", tone: "live" },
+          { label: "Latest deploy", value: "May 12 · JMW OS goes live", tone: "live" },
         ]}
       />
 
