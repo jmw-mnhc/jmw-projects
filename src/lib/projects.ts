@@ -37,7 +37,7 @@ export const projects: Project[] = [
     status: "live",
     category: "Personal tools",
     stack: ["Next.js 16", "React 19", "Tailwind 4", "Claude Code"],
-    href: "https://command-center-tau-two.vercel.app",
+    href: "https://jmwos.vercel.app",
     featured: true,
     private: true,
   },
