@@ -7,9 +7,10 @@ import { Mark } from "@/components/mark";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#writing", label: "Writing" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/hr", label: "HR" },
+  { href: "/research", label: "Research" },
+  { href: "/#about", label: "About" },
 ];
 
 const JMW_OS_URL = "/os";

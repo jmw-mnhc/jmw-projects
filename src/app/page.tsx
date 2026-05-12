@@ -186,6 +186,43 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="research" className="border-b border-[var(--border-warm)] bg-[var(--surface-warm)]">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <FadeIn>
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.4fr]">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--accent-deep)] dark:text-[var(--accent-bright)]">
+                  Research · May 2026
+                </p>
+                <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                  <span className="bg-gradient-to-br from-[var(--foreground)] via-[var(--accent-deep)] to-[var(--accent)] bg-clip-text text-transparent">
+                    AI agents &amp; personal operating systems.
+                  </span>
+                </h2>
+              </div>
+              <div className="text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                <p>
+                  Field notes on the 2026 agent-framework gold rush. Compared
+                  Hermes Agent, Hyperagent (Airtable), Claude Code, OpenClaw,
+                  Argent OS, and Claude Flow. Concluded I already had ~80% of a
+                  Personal OS &mdash; and shipped the surface instead of
+                  installing a framework.
+                </p>
+                <p className="mt-4">
+                  <Link
+                    href="/research"
+                    className="inline-flex items-center gap-1.5 font-medium text-[var(--accent)] transition hover:text-[var(--accent-bright)]"
+                  >
+                    Read the full research
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       <section id="about" className="border-b border-[var(--border-cool)] bg-[var(--surface-cool)]">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <FadeIn>
