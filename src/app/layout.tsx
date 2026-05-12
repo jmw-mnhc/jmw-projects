@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
+import { PasswordGateProvider } from "@/components/password-gate";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeScript } from "@/components/theme-script";
 import "./globals.css";
@@ -42,9 +43,11 @@ export default function RootLayout({
         <ThemeScript />
       </head>
       <body className="min-h-full bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
-        <ScrollProgress />
-        <Nav />
-        {children}
+        <PasswordGateProvider>
+          <ScrollProgress />
+          <Nav />
+          {children}
+        </PasswordGateProvider>
       </body>
     </html>
   );

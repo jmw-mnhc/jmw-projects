@@ -10,6 +10,7 @@ export type Project = {
   stack?: string[];
   href?: string;
   featured?: boolean;
+  private?: boolean;
 };
 
 export const STATUS_LABELS: Record<ProjectStatus, string> = {
@@ -28,6 +29,19 @@ export const STATUS_STYLES: Record<ProjectStatus, string> = {
 
 export const projects: Project[] = [
   {
+    id: "jmw-os",
+    name: "JMW OS",
+    tagline: "Personal operating system",
+    description:
+      "Single pane of glass over every active project. Reads each repo's daily-reports, surfaces today's brief, cross-project patterns, and a hub to all 15 deployed sites. Built on Claude Code, password-gated, shipped to Vercel.",
+    status: "live",
+    category: "Personal tools",
+    stack: ["Next.js 16", "React 19", "Tailwind 4", "Claude Code"],
+    href: "https://command-center-tau-two.vercel.app",
+    featured: true,
+    private: true,
+  },
+  {
     id: "business-ideas",
     name: "JMW Dealflow",
     tagline: "Acquisition intelligence",
@@ -36,7 +50,9 @@ export const projects: Project[] = [
     status: "building",
     category: "Personal tools",
     stack: ["Next.js 16", "React 19", "Tailwind 4"],
+    href: "https://business-ideas.vercel.app",
     featured: true,
+    private: true,
   },
   {
     id: "fqhc-talent-exchange",
@@ -58,6 +74,7 @@ export const projects: Project[] = [
     status: "research",
     category: "Marketplace",
     featured: true,
+    private: true,
   },
   {
     id: "mnhc-website",
@@ -65,8 +82,9 @@ export const projects: Project[] = [
     tagline: "Community health center site",
     description:
       "Modern public-facing site for a community health center with clear service navigation and patient resources.",
-    status: "building",
+    status: "live",
     category: "Client work",
+    href: "https://mnhc.org",
   },
   {
     id: "nasim-realty",
@@ -76,6 +94,7 @@ export const projects: Project[] = [
       "Boutique real estate brand site — listings, neighborhoods, and agent positioning for the Bay Area market.",
     status: "live",
     category: "Client work",
+    private: true,
   },
   {
     id: "berkeley-bungalow-map",
@@ -85,6 +104,7 @@ export const projects: Project[] = [
       "Interactive map of Berkeley's historic bungalows — style, era, and street-level photography.",
     status: "live",
     category: "Local",
+    private: true,
   },
   {
     id: "global-hr-navigator",
@@ -94,6 +114,7 @@ export const projects: Project[] = [
       "Decision support for HR teams managing employment across jurisdictions — policies, leave, and termination playbooks.",
     status: "research",
     category: "B2B",
+    private: true,
   },
   {
     id: "parent-network",
@@ -103,6 +124,7 @@ export const projects: Project[] = [
       "Lightweight directory and event board to help parents in a neighborhood find each other.",
     status: "research",
     category: "Local",
+    private: true,
   },
   {
     id: "pss-training-app",
@@ -112,6 +134,7 @@ export const projects: Project[] = [
       "Mobile-friendly training tool for peer support specialists with module tracking and reference content.",
     status: "building",
     category: "Education",
+    private: true,
   },
   {
     id: "conference-intel",
@@ -121,5 +144,6 @@ export const projects: Project[] = [
       "Tracker for the conferences, speakers, and themes shaping a target industry — informs deal-flow and outreach.",
     status: "research",
     category: "Personal tools",
+    private: true,
   },
 ];

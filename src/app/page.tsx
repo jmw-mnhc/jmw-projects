@@ -3,79 +3,24 @@ import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { Hero } from "@/components/hero";
 import { Marquee } from "@/components/marquee";
+import { ProjectCard } from "@/components/project-card";
 import { StatStrip } from "@/components/stat-strip";
-import {
-  STATUS_LABELS,
-  projects,
-  type Project,
-} from "@/lib/projects";
-
-function ProjectCard({ project }: { project: Project }) {
-  const inner = (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--paper)] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-bright)]/60 hover:shadow-[var(--card-shadow)]">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(120%_60%_at_50%_0%,var(--card-glow),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -top-px left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-[var(--accent-bright)] to-transparent transition-all duration-500 group-hover:w-3/4"
-      />
-      <div className="flex items-baseline justify-between gap-2">
-        <h3 className="text-lg font-medium text-[var(--foreground)]">
-          {project.name}
-        </h3>
-        <span className="text-[11px] uppercase tracking-wider text-[var(--muted)]">
-          {STATUS_LABELS[project.status]}
-        </span>
-      </div>
-      <p className="mt-1 text-sm font-medium text-[var(--accent)]">
-        {project.tagline}
-      </p>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
-        {project.description}
-      </p>
-      {project.stack && (
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.stack.map((s) => (
-            <span
-              key={s}
-              className="rounded-full border border-[var(--border)] bg-[var(--surface-warm)] px-2 py-0.5 text-[10px] text-[var(--muted)]"
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      )}
-      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] transition group-hover:text-[var(--accent-bright)]">
-        {project.href ? "Visit" : "Read more"}
-        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-      </span>
-    </article>
-  );
-  return project.href ? (
-    <Link href={project.href} className="block h-full">
-      {inner}
-    </Link>
-  ) : (
-    inner
-  );
-}
+import { projects } from "@/lib/projects";
 
 const featuredCallouts = [
   {
-    eyebrow: "Building",
-    title: "Introducing JMW Dealflow",
+    eyebrow: "Just shipped · May 2026",
+    title: "Introducing JMW OS",
     description:
-      "An independent acquisition intelligence workspace. Pipeline, lender readiness, and SBA 7(a) profile in one place.",
-    cta: { href: "https://business-ideas-virid.vercel.app", label: "Open the workspace" },
+      "A personal operating system. One dashboard over every project I'm running — daily briefs, action checklists, the hub linking out to all 15 live sites. Built on Claude Code.",
+    cta: { href: "https://command-center-tau-two.vercel.app", label: "Open JMW OS" },
   },
   {
-    eyebrow: "In flight · 2026",
-    title: "FQHC Talent Exchange",
+    eyebrow: "Building",
+    title: "JMW Dealflow",
     description:
-      "Marketplace pairing community health centers with clinicians for short-term and locum coverage.",
-    cta: { href: "#projects", label: "See the project" },
+      "An independent acquisition intelligence workspace. Pipeline, lender readiness, and SBA 7(a) profile in one place.",
+    cta: { href: "https://business-ideas.vercel.app", label: "Open the workspace" },
   },
 ];
 
