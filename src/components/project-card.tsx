@@ -40,6 +40,11 @@ export function ProjectCard({ project }: { project: Project }) {
       <p className="mt-1 text-sm font-medium text-[var(--accent)]">
         {project.tagline}
       </p>
+      {project.launched && (
+        <p className="mt-1 text-[11px] uppercase tracking-wider text-emerald-300/80">
+          Launched {project.launched}
+        </p>
+      )}
       <p
         className={`mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)] transition ${
           locked ? "blur-[3px] select-none" : ""
@@ -47,6 +52,17 @@ export function ProjectCard({ project }: { project: Project }) {
       >
         {project.description}
       </p>
+      {project.compareHref && !locked && (
+        <a
+          href={project.compareHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="mt-2 inline-flex w-fit items-center gap-1 text-[11px] font-medium text-[var(--muted)] underline decoration-dotted underline-offset-4 transition hover:text-[var(--accent)]"
+        >
+          {project.compareLabel || "Compare"} →
+        </a>
+      )}
       {project.stack && (
         <div className="mt-4 flex flex-wrap gap-1.5">
           {project.stack.map((s) => (

@@ -16,6 +16,16 @@ const JMW_OS_URL = "/os";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  // Only operators who have already authenticated into /os see the pill.
+  const [showOS, setShowOS] = useState(false);
+
+  useEffect(() => {
+    try {
+      setShowOS(localStorage.getItem("jmwos_unlocked") === "1");
+    } catch {
+      // ignore
+    }
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -42,13 +52,15 @@ export function Nav() {
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <Link
-            href={JMW_OS_URL}
-            className="hidden items-center gap-1.5 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1.5 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:inline-flex"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            JMW OS
-          </Link>
+          {showOS && (
+            <Link
+              href={JMW_OS_URL}
+              className="hidden items-center gap-1.5 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1.5 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:inline-flex"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              JMW OS
+            </Link>
+          )}
           <ThemeToggle />
           <a
             href="#contact"
@@ -83,14 +95,16 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href={JMW_OS_URL}
-            onClick={() => setOpen(false)}
-            className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)]"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            JMW OS
-          </Link>
+          {showOS && (
+            <Link
+              href={JMW_OS_URL}
+              onClick={() => setOpen(false)}
+              className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)]"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              JMW OS
+            </Link>
+          )}
           <a
             href="#contact"
             onClick={() => setOpen(false)}

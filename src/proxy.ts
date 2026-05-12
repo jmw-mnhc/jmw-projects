@@ -7,7 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 // named `proxy` (not `middleware`).
 // Trim handles the case where `echo "jmwdemo" | vercel env add` saved the
 // value with a trailing newline character.
-const SITE_PASSWORD = (process.env.SITE_PASSWORD || "jmwdemo").trim();
+// OS password (set on Vercel as env var; falls back to default for local dev).
+const SITE_PASSWORD = (process.env.SITE_PASSWORD || "jmwprojects").trim();
 const SITE_USER = (process.env.SITE_USER || "jmw").trim();
 
 export function proxy(req: NextRequest) {

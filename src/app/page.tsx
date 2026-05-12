@@ -9,18 +9,18 @@ import { projects } from "@/lib/projects";
 
 const featuredCallouts = [
   {
-    eyebrow: "Just shipped · May 2026",
-    title: "Introducing JMW OS",
+    eyebrow: "Live · Active marketplace",
+    title: "FQHC Talent Exchange",
     description:
-      "A personal operating system. One dashboard over every project I'm running — daily briefs, action checklists, the hub linking out to all 15 live sites. Built on Claude Code.",
-    cta: { href: "/os", label: "Open JMW OS" },
+      "Two-sided marketplace connecting Federally Qualified Health Centers with clinicians for short-term and locum coverage. Active and growing.",
+    cta: { href: "https://fqhc-talent-exchange.vercel.app", label: "Visit FQHC Talent" },
   },
   {
-    eyebrow: "Building",
-    title: "JMW Dealflow",
+    eyebrow: "Launched May 11, 2026",
+    title: "MNHC Website",
     description:
-      "An independent acquisition intelligence workspace. Pipeline, lender readiness, and SBA 7(a) profile in one place.",
-    cta: { href: "https://business-ideas.vercel.app", label: "Open the workspace" },
+      "Full rebuild of mnhc.org — modern, fast, WCAG 2.1 AA compliant. Replaces the prior WordPress site with a Next.js stack and a dramatically better service-navigation experience.",
+    cta: { href: "https://www.mnhc.org", label: "Visit mnhc.org" },
   },
 ];
 
@@ -43,11 +43,13 @@ const principles = [
 ];
 
 export default function Home() {
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-  const liveCount = projects.filter((p) => p.status === "live").length;
-  const buildingCount = projects.filter((p) => p.status === "building").length;
-  const researchCount = projects.filter((p) => p.status === "research").length;
+  // Exclude operator-only projects (e.g. JMW OS) from every public render.
+  const publicProjects = projects.filter((p) => !p.restricted);
+  const featured = publicProjects.filter((p) => p.featured);
+  const rest = publicProjects.filter((p) => !p.featured);
+  const liveCount = publicProjects.filter((p) => p.status === "live").length;
+  const buildingCount = publicProjects.filter((p) => p.status === "building").length;
+  const researchCount = publicProjects.filter((p) => p.status === "research").length;
 
   return (
     <>
@@ -75,15 +77,15 @@ export default function Home() {
 
       <Marquee
         items={[
-          { label: "Just shipped", value: "JMW OS · personal operating system", tone: "live" },
-          { label: "Now building", value: "JMW Dealflow · acquisition intelligence", tone: "live" },
-          { label: "Marketplace", value: "FQHC Talent Exchange · clinician coverage", tone: "accent" },
+          { label: "Launched May 11", value: "MNHC Website · mnhc.org rebuild", tone: "live" },
+          { label: "Live", value: "FQHC Talent Exchange · clinician coverage", tone: "live" },
+          { label: "Now building", value: "CA Employment Law · legislative tracker", tone: "accent" },
+          { label: "Now building", value: "PSS Training App · peer support modules", tone: "accent" },
+          { label: "Now building", value: "Criminal Defense Talent Exchange", tone: "accent" },
+          { label: "Now building", value: "Acquisition + Investment Studio", tone: "accent" },
           { label: "Live", value: "Nasim Realty · Bay Area boutique", tone: "default" },
           { label: "Atlas", value: "Berkeley Bungalow Map · historic homes", tone: "default" },
-          { label: "B2B", value: "Global HR Navigator · cross-border compliance", tone: "accent" },
-          { label: "Education", value: "PSS Training App · peer support modules", tone: "default" },
-          { label: "Local", value: "Parent Network · neighborhood directory", tone: "default" },
-          { label: "Latest deploy", value: "May 12 · JMW OS goes live", tone: "live" },
+          { label: "Local", value: "Berkeley Parent Network · family resources", tone: "default" },
         ]}
       />
 

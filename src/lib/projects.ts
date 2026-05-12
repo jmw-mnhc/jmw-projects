@@ -9,8 +9,16 @@ export type Project = {
   category: string;
   stack?: string[];
   href?: string;
+  /** Launch date label, e.g. "May 11, 2026" — shown on live projects */
+  launched?: string;
+  /** Optional before/after comparison URL (e.g. WordPress archive) */
+  compareHref?: string;
+  /** Comparison link label */
+  compareLabel?: string;
   featured?: boolean;
   private?: boolean;
+  /** Hide from the public portfolio render entirely (operator-only) */
+  restricted?: boolean;
 };
 
 export const STATUS_LABELS: Record<ProjectStatus, string> = {
@@ -28,64 +36,91 @@ export const STATUS_STYLES: Record<ProjectStatus, string> = {
 };
 
 export const projects: Project[] = [
-  {
-    id: "jmw-os",
-    name: "JMW OS",
-    tagline: "Personal operating system",
-    description:
-      "Single pane of glass over every active project. Reads each repo's daily-reports, surfaces today's brief, cross-project patterns, and a hub to all 15 deployed sites. Built on Claude Code, password-gated, shipped to Vercel.",
-    status: "live",
-    category: "Personal tools",
-    stack: ["Next.js 16", "React 19", "Tailwind 4", "Claude Code"],
-    href: "/os",
-    featured: true,
-    private: true,
-  },
-  {
-    id: "business-ideas",
-    name: "JMW Dealflow",
-    tagline: "Acquisition intelligence",
-    description:
-      "Pipeline, lender readiness, and SBA 7(a) profile in one dashboard. Track every listing on the path to a cash-flowing close.",
-    status: "building",
-    category: "Personal tools",
-    stack: ["Next.js 16", "React 19", "Tailwind 4"],
-    href: "https://business-ideas.vercel.app",
-    featured: true,
-    private: true,
-  },
+  // === LIVE & ACTIVE ===
   {
     id: "fqhc-talent-exchange",
     name: "FQHC Talent Exchange",
     tagline: "Healthcare staffing marketplace",
     description:
-      "Two-sided marketplace connecting Federally Qualified Health Centers with clinicians for short-term and locum coverage.",
-    status: "building",
+      "Two-sided marketplace connecting Federally Qualified Health Centers with clinicians for short-term and locum coverage. Live and growing.",
+    status: "live",
     category: "Marketplace",
-    stack: ["Next.js", "Supabase", "shadcn/ui"],
+    stack: ["Next.js 16", "Supabase", "shadcn/ui"],
+    href: "https://fqhc-talent-exchange.vercel.app",
     featured: true,
-  },
-  {
-    id: "criminal-defense-talent-exchange",
-    name: "Criminal Defense Talent Exchange",
-    tagline: "Legal staffing platform",
-    description:
-      "Talent network for criminal defense firms — coverage attorneys, paralegals, and investigators matched by jurisdiction.",
-    status: "research",
-    category: "Marketplace",
-    featured: true,
-    private: true,
   },
   {
     id: "mnhc-website",
     name: "MNHC Website",
     tagline: "Community health center site",
     description:
-      "Modern public-facing site for a community health center with clear service navigation and patient resources.",
+      "Full rebuild of mnhc.org — modern, fast, WCAG 2.1 AA compliant. Replaces the prior WordPress site with a Next.js stack, dramatically better service navigation, and patient resources.",
     status: "live",
     category: "Client work",
-    href: "https://mnhc.org",
+    stack: ["Next.js 16", "Tailwind 4", "Accessibility"],
+    href: "https://www.mnhc.org",
+    launched: "May 11, 2026",
+    // TODO: replace with hosted WP archive URL once snapshot deployed
+    compareHref: undefined,
+    compareLabel: "View old WordPress site",
+    featured: true,
   },
+
+  // === IN DEVELOPMENT ===
+  {
+    id: "ca-employment-law",
+    name: "CA Employment Law",
+    tagline: "Case assessment + legislative tracker",
+    description:
+      "California employment-law platform: case-assessment tool, attorney resources, and a live legislative tracker that monitors 200+ news items and 80+ legislative entries.",
+    status: "building",
+    category: "Legal tech",
+    stack: ["Next.js 16", "Supabase", "Tailwind 4"],
+    href: "https://ca-employment-law.vercel.app",
+    featured: true,
+    private: true,
+  },
+  {
+    id: "pss-training-app",
+    name: "PSS Training App",
+    tagline: "Peer support specialist learning",
+    description:
+      "Interactive training PWA for MNHC peer-support staff. Modules, quizzes, and completion tracking. Built mobile-first for use in the field.",
+    status: "building",
+    category: "Education",
+    stack: ["Next.js 16", "Tailwind 4"],
+    href: "https://pss-training-app.vercel.app",
+    featured: true,
+    private: true,
+  },
+  {
+    id: "criminal-defense-talent-exchange",
+    name: "Criminal Defense Talent Exchange",
+    tagline: "Legal staffing platform",
+    description:
+      "Talent network for criminal-defense firms — coverage attorneys, paralegals, and investigators matched by jurisdiction. AB 690 + market intelligence built in.",
+    status: "building",
+    category: "Marketplace",
+    stack: ["Next.js 16", "Supabase"],
+    href: "https://criminal-defense-talent-exchange.vercel.app",
+    featured: true,
+    private: true,
+  },
+  {
+    id: "business-ideas",
+    name: "Acquisition + Investment Studio",
+    tagline: "Deal flow + lifestyle synergy",
+    description:
+      "Personal acquisition studio. Pipeline tracking across Portugal, Bay Area, and Brazil; SBA 7(a) readiness; lender profiles; lifestyle synergy scoring; and a Berkeley mixed-use track.",
+    status: "building",
+    category: "Personal studio",
+    stack: ["Next.js 16", "React 19", "Tailwind 4"],
+    href: "https://business-ideas.vercel.app",
+    featured: true,
+    private: true,
+  },
+
+  // === REST ===
   {
     id: "nasim-realty",
     name: "Nasim Realty",
@@ -94,6 +129,7 @@ export const projects: Project[] = [
       "Boutique real estate brand site — listings, neighborhoods, and agent positioning for the Bay Area market.",
     status: "live",
     category: "Client work",
+    href: "https://nasim-realty.vercel.app",
     private: true,
   },
   {
@@ -104,6 +140,18 @@ export const projects: Project[] = [
       "Interactive map of Berkeley's historic bungalows — style, era, and street-level photography.",
     status: "live",
     category: "Local",
+    href: "https://berkeley-bungalow-map.vercel.app",
+    private: true,
+  },
+  {
+    id: "parent-network",
+    name: "Berkeley Parent Network",
+    tagline: "Local parent connection",
+    description:
+      "Bay Area family resources, BUSD data, BANANAS childcare, Mother's Day and summer camp guides.",
+    status: "research",
+    category: "Local",
+    href: "https://bpn-berkeley.vercel.app",
     private: true,
   },
   {
@@ -117,33 +165,29 @@ export const projects: Project[] = [
     private: true,
   },
   {
-    id: "parent-network",
-    name: "Parent Network",
-    tagline: "Local parent connection",
-    description:
-      "Lightweight directory and event board to help parents in a neighborhood find each other.",
-    status: "research",
-    category: "Local",
-    private: true,
-  },
-  {
-    id: "pss-training-app",
-    name: "PSS Training App",
-    tagline: "Peer support specialist learning",
-    description:
-      "Mobile-friendly training tool for peer support specialists with module tracking and reference content.",
-    status: "building",
-    category: "Education",
-    private: true,
-  },
-  {
     id: "conference-intel",
     name: "Conference Intel",
     tagline: "Industry event research",
     description:
-      "Tracker for the conferences, speakers, and themes shaping a target industry — informs deal-flow and outreach.",
+      "Speaker + sponsor Venn marketplace; tracker for the conferences, speakers, and themes shaping target industries.",
     status: "research",
     category: "Personal tools",
+    href: "https://conference-intel.vercel.app",
     private: true,
+  },
+
+  // === OPERATOR-ONLY (hidden from public render) ===
+  {
+    id: "jmw-os",
+    name: "JMW OS",
+    tagline: "Personal operating system",
+    description:
+      "Single pane of glass over every active project. Reads each repo's daily-reports, surfaces today's brief, cross-project patterns, and a hub to all 15 deployed sites. Built on Claude Code.",
+    status: "live",
+    category: "Personal tools",
+    stack: ["Next.js 16", "React 19", "Tailwind 4", "Claude Code"],
+    href: "/os",
+    private: true,
+    restricted: true,
   },
 ];
