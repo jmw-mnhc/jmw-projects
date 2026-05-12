@@ -3,12 +3,19 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Legacy bookmark: jmwos.vercel.app/ → /os
-      // The canonical URL is jmw-projects.vercel.app/os.
+      // Canonical host is jmwprojects.vercel.app (no dash).
+      // Redirect the dashed default alias permanently.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "jmw-projects.vercel.app" }],
+        destination: "https://jmwprojects.vercel.app/:path*",
+        permanent: true,
+      },
+      // Legacy bookmark: jmwos.vercel.app/ → canonical /os
       {
         source: "/",
         has: [{ type: "host", value: "jmwos.vercel.app" }],
-        destination: "/os",
+        destination: "https://jmwprojects.vercel.app/os",
         permanent: false,
       },
     ];
