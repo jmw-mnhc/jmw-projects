@@ -13,6 +13,7 @@ import {
   ListTree,
   Menu,
   Search,
+  Wrench,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/os/utils";
@@ -26,6 +27,7 @@ const TOP_LINKS = [
   { href: "/os/search", label: "Search", icon: Search },
   { href: "/os/trends", label: "Trends", icon: LineChart },
   { href: "/os/sites", label: "Sites", icon: Globe },
+  { href: "/os/stack", label: "Stack", icon: Wrench },
   { href: "/os/about", label: "About", icon: Info },
 ];
 
