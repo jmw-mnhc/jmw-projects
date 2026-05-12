@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Hero } from "@/components/hero";
+import { StatStrip } from "@/components/stat-strip";
 import {
   STATUS_LABELS,
   projects,
@@ -116,6 +117,15 @@ export default function Home() {
         secondaryCta={{ href: "#contact", label: "Get in touch" }}
       />
 
+      <StatStrip
+        stats={[
+          { label: "Projects", value: String(projects.length), caption: "Tracked end-to-end" },
+          { label: "Live", value: String(liveCount), caption: "Shipping to real users" },
+          { label: "Building", value: String(buildingCount), caption: "Active this quarter" },
+          { label: "Research", value: String(researchCount), caption: "Scoping next bets" },
+        ]}
+      />
+
       <section className="border-b border-[#e8e1d0] bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px bg-[#e8e1d0] md:grid-cols-2">
           {featuredCallouts.map((f) => (
@@ -187,8 +197,10 @@ export default function Home() {
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#0a5e58]">
               Projects
             </p>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#0a1419] sm:text-4xl">
-              What I&apos;m actually working on.
+            <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+              <span className="bg-gradient-to-br from-[#0a1419] via-[#0a5e58] to-[#0e7c75] bg-clip-text text-transparent">
+                What I&apos;m actually working on.
+              </span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#4a5560]">
               Each project is a focused attempt at one problem. Click into the
@@ -211,8 +223,10 @@ export default function Home() {
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#0a5e58]">
                 About
               </p>
-              <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#0a1419] sm:text-4xl">
-                Operator who codes. Coder who thinks like an operator.
+              <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                <span className="bg-gradient-to-br from-[#0a1419] via-[#0a5e58] to-[#0e7c75] bg-clip-text text-transparent">
+                  Operator who codes. Coder who thinks like an operator.
+                </span>
               </h2>
             </div>
             <div className="text-base leading-relaxed text-[#4a5560] sm:text-lg">
@@ -238,8 +252,10 @@ export default function Home() {
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#0a5e58]">
               Principles
             </p>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#0a1419] sm:text-4xl">
-              How I decide what to build.
+            <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+              <span className="bg-gradient-to-br from-[#0a1419] via-[#0a5e58] to-[#0e7c75] bg-clip-text text-transparent">
+                How I decide what to build.
+              </span>
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -267,8 +283,10 @@ export default function Home() {
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#0a5e58]">
                 Get in touch
               </p>
-              <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#0a1419] sm:text-4xl">
-                Have a problem worth solving together?
+              <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                <span className="bg-gradient-to-br from-[#0a1419] via-[#0a5e58] to-[#0e7c75] bg-clip-text text-transparent">
+                  Have a problem worth solving together?
+                </span>
               </h2>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-[#4a5560] sm:text-base">
                 Healthcare, real estate, marketplaces, acquisition, local
