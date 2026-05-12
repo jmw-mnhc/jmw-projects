@@ -60,9 +60,9 @@ export const projects: Project[] = [
     stack: ["Next.js 16", "Tailwind 4", "Accessibility"],
     href: "https://www.mnhc.org",
     launched: "May 11, 2026",
-    // TODO: replace with hosted WP archive URL once snapshot deployed
-    compareHref: undefined,
-    compareLabel: "View old WordPress site",
+    // Wayback Machine snapshot from March 9, 2026 — before the Next.js rebuild went live.
+    compareHref: "https://web.archive.org/web/20260309102526/https://www.mnhc.org/",
+    compareLabel: "See old WordPress site (March 2026)",
     featured: true,
   },
 
