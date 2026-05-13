@@ -1,40 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Edge-runtime-safe Basic Auth gate. Password is provided via SITE_PASSWORD
-// env var on Vercel; defaults to "jmwdemo" so local dev just works.
+// Cookie-based gate for /os. The in-page "Operator" modal sets this cookie —
+// one password, no browser-native Basic Auth popup.
 //
-// Next.js 16 renamed `middleware.ts` -> `proxy.ts`. The function must also be
+// Next.js 16 renamed `middleware.ts` -> `proxy.ts`; the function must be
 // named `proxy` (not `middleware`).
-// Trim handles the case where `echo "jmwdemo" | vercel env add` saved the
-// value with a trailing newline character.
-// OS password (set on Vercel as env var; falls back to default for local dev).
 const SITE_PASSWORD = (process.env.SITE_PASSWORD || "jmwprojects").trim();
-const SITE_USER = (process.env.SITE_USER || "jmw").trim();
+const COOKIE_NAME = "jmwp_unlocked";
 
 export function proxy(req: NextRequest) {
-  const auth = req.headers.get("authorization");
-  if (auth?.startsWith("Basic ")) {
-    try {
-      const decoded = atob(auth.slice(6));
-      const idx = decoded.indexOf(":");
-      const user = idx === -1 ? "" : decoded.slice(0, idx);
-      const pass = idx === -1 ? decoded : decoded.slice(idx + 1);
-      if (
-        pass === SITE_PASSWORD &&
-        (SITE_USER === "*" || user === SITE_USER || user === "")
-      ) {
-        return NextResponse.next();
-      }
-    } catch {
-      // fall through to 401
-    }
+  const cookie = req.cookies.get(COOKIE_NAME)?.value;
+  if (cookie === SITE_PASSWORD) {
+    return NextResponse.next();
   }
-  return new NextResponse("Authentication required.", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="JMW OS", charset="UTF-8"',
-    },
-  });
+  // No valid cookie — bounce back to the landing page so the user can unlock
+  // via the same in-page modal. No second sign-in prompt.
+  const url = req.nextUrl.clone();
+  url.pathname = "/";
+  url.searchParams.set("unlock", "1");
+  return NextResponse.redirect(url);
 }
 
 export const config = {

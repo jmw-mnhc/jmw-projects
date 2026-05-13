@@ -1,6 +1,5 @@
 import { SidebarNav } from "@/components/os/sidebar-nav";
 import { ThemeToggle } from "@/components/os/theme-toggle";
-import { UnlockSetter } from "@/components/os/unlock-setter";
 import { PROJECTS } from "@/lib/os/projects";
 
 export default function OSLayout({
@@ -8,7 +7,6 @@ export default function OSLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <UnlockSetter />
       <div className="flex min-h-screen md:flex-row">
         <SidebarNav projects={PROJECTS} />
         <div className="flex min-h-screen w-full flex-1 flex-col md:pl-0">

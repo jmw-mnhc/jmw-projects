@@ -9,12 +9,16 @@ const DEMO_IDS = [
   "fqhc-talent-exchange",
   "mnhc-website",
   "ca-employment-law",
+  "pss-training-app",
 ];
 
 export function LandingDemo() {
   const { request } = usePasswordGate();
   const items = DEMO_IDS.map((id) => projects.find((p) => p.id === id)!).filter(
     Boolean,
+  );
+  const others = projects.filter(
+    (p) => !p.restricted && !DEMO_IDS.includes(p.id),
   );
 
   return (
@@ -79,6 +83,26 @@ export function LandingDemo() {
           </li>
         ))}
       </ul>
+
+      {others.length > 0 && (
+        <section className="mt-14">
+          <p className="mb-6 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--muted-soft)]">
+            Also in the portfolio
+          </p>
+          <ul className="space-y-6">
+            {others.map((p) => (
+              <li key={p.id}>
+                <p className="text-base font-medium text-[var(--foreground)]">
+                  {p.name}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
+                  {p.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* DISCRETE UNLOCK */}
       <div className="mt-16 flex justify-end">

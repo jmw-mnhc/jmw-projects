@@ -11,7 +11,17 @@ import {
 } from "react";
 
 const STORAGE_KEY = "jmw-projects-unlocked";
+const COOKIE_NAME = "jmwp_unlocked";
 const PASSWORD = "jmwprojects";
+
+function setCookie() {
+  // 7-day cookie shared with the proxy that gates /os.
+  document.cookie = `${COOKIE_NAME}=${PASSWORD}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+}
+
+function clearCookie() {
+  document.cookie = `${COOKIE_NAME}=; path=/; max-age=0; SameSite=Lax`;
+}
 
 type PasswordGateValue = {
   unlocked: boolean;
@@ -42,8 +52,23 @@ export function PasswordGateProvider({
 
   useEffect(() => {
     try {
-      if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+      const fromSession = sessionStorage.getItem(STORAGE_KEY) === "true";
+      const fromCookie = document.cookie
+        .split("; ")
+        .some((c) => c === `${COOKIE_NAME}=${PASSWORD}`);
+      if (fromSession || fromCookie) {
         setUnlocked(true);
+        if (fromSession && !fromCookie) setCookie();
+        return;
+      }
+      // Auto-open the modal when bounced back from /os via ?unlock=1.
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("unlock") === "1") {
+        setOpen(true);
+        params.delete("unlock");
+        const qs = params.toString();
+        const next = window.location.pathname + (qs ? `?${qs}` : "");
+        window.history.replaceState({}, "", next);
       }
     } catch {}
   }, []);
@@ -72,6 +97,7 @@ export function PasswordGateProvider({
     setError(false);
     try {
       sessionStorage.removeItem(STORAGE_KEY);
+      clearCookie();
     } catch {}
   }, []);
 
@@ -83,6 +109,7 @@ export function PasswordGateProvider({
       setError(false);
       try {
         sessionStorage.setItem(STORAGE_KEY, "true");
+        setCookie();
       } catch {}
     } else {
       setError(true);
@@ -160,8 +187,8 @@ export function PasswordGateProvider({
                 </button>
               </form>
               <p className="mt-5 text-[11px] text-[var(--muted-soft)]">
-                Public projects (FQHC Talent Exchange, MNHC, CA Employment Law)
-                remain accessible without a code.
+                Public links (FQHC Talent Exchange, MNHC, CA Employment Law,
+                PSS Training) remain accessible without a code.
               </p>
             </div>
           </div>
