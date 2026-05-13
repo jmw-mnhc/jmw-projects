@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Lock } from "lucide-react";
 import Link from "next/link";
+import { usePasswordGate } from "@/components/password-gate";
 import { projects } from "@/lib/projects";
 
 const DEMO_IDS = [
@@ -11,6 +12,7 @@ const DEMO_IDS = [
 ];
 
 export function LandingDemo() {
+  const { request } = usePasswordGate();
   const items = DEMO_IDS.map((id) => projects.find((p) => p.id === id)!).filter(
     Boolean,
   );
@@ -77,6 +79,19 @@ export function LandingDemo() {
           </li>
         ))}
       </ul>
+
+      {/* DISCRETE UNLOCK */}
+      <div className="mt-16 flex justify-end">
+        <button
+          type="button"
+          onClick={request}
+          aria-label="Sign in to operator console"
+          className="inline-flex items-center gap-1 text-[11px] text-[var(--muted-soft)] transition hover:text-[var(--accent)]"
+        >
+          <Lock className="h-3 w-3" />
+          Operator
+        </button>
+      </div>
     </main>
   );
 }
