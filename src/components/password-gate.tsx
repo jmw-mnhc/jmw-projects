@@ -11,17 +11,18 @@ import {
 } from "react";
 
 const STORAGE_KEY = "jmw-projects-unlocked";
-const PASSWORD = "jmwdemo";
-const SCROLL_TRIGGER_PX = 240;
+const PASSWORD = "jmwprojects";
 
 type PasswordGateValue = {
   unlocked: boolean;
   request: () => void;
+  lock: () => void;
 };
 
 const PasswordGateContext = createContext<PasswordGateValue>({
   unlocked: false,
   request: () => {},
+  lock: () => {},
 });
 
 export function usePasswordGate() {
@@ -37,30 +38,15 @@ export function PasswordGateProvider({
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const scrollTriggered = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     try {
       if (sessionStorage.getItem(STORAGE_KEY) === "true") {
         setUnlocked(true);
-        scrollTriggered.current = true;
       }
     } catch {}
   }, []);
-
-  useEffect(() => {
-    if (unlocked) return;
-    const onScroll = () => {
-      if (scrollTriggered.current) return;
-      if (window.scrollY > SCROLL_TRIGGER_PX) {
-        scrollTriggered.current = true;
-        setOpen(true);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [unlocked]);
 
   useEffect(() => {
     if (!open) return;
@@ -79,6 +65,16 @@ export function PasswordGateProvider({
     if (!unlocked) setOpen(true);
   }, [unlocked]);
 
+  const lock = useCallback(() => {
+    setUnlocked(false);
+    setOpen(false);
+    setValue("");
+    setError(false);
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {}
+  }, []);
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (value.trim().toLowerCase() === PASSWORD) {
@@ -94,7 +90,7 @@ export function PasswordGateProvider({
   };
 
   return (
-    <PasswordGateContext.Provider value={{ unlocked, request }}>
+    <PasswordGateContext.Provider value={{ unlocked, request, lock }}>
       {children}
       {open && !unlocked && (
         <div
@@ -134,8 +130,8 @@ export function PasswordGateProvider({
                 Enter access code
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-                Most of these projects are private builds. Enter the demo code
-                to explore the full portfolio.
+                Most of these projects are work-in-progress private builds.
+                Enter the access code to explore the full portfolio.
               </p>
               <form onSubmit={submit} className="mt-6 flex flex-col gap-3">
                 <input
@@ -164,8 +160,8 @@ export function PasswordGateProvider({
                 </button>
               </form>
               <p className="mt-5 text-[11px] text-[var(--muted-soft)]">
-                Public projects (MNHC, FQHC Talent Exchange) remain accessible
-                without a code.
+                Public projects (FQHC Talent Exchange, MNHC, CA Employment Law)
+                remain accessible without a code.
               </p>
             </div>
           </div>
