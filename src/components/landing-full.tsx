@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, Briefcase, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Brain, Lock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { Hero } from "@/components/hero";
@@ -8,6 +8,16 @@ import { StatStrip } from "@/components/stat-strip";
 import { projects } from "@/lib/projects";
 
 const quickLinks = [
+  {
+    href: "/hr",
+    eyebrow: "Practice · Now taking clients",
+    title: "Small Business AI Partner",
+    description:
+      "AI implementation for 10–250-person orgs. Anchored on an 83% adoption HIPAA case study.",
+    icon: Brain,
+    locked: false,
+    external: false,
+  },
   {
     href: "/os",
     eyebrow: "Operator",
