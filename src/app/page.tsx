@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Lock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { Hero } from "@/components/hero";
@@ -6,6 +6,36 @@ import { Marquee } from "@/components/marquee";
 import { ProjectCard } from "@/components/project-card";
 import { StatStrip } from "@/components/stat-strip";
 import { projects } from "@/lib/projects";
+
+const quickLinks = [
+  {
+    href: "/os",
+    eyebrow: "Operator",
+    title: "JMW OS",
+    description: "Personal operating system. Today’s brief across every project.",
+    icon: Sparkles,
+    locked: true,
+    external: false,
+  },
+  {
+    href: "/research",
+    eyebrow: "Read",
+    title: "AI & OS Research",
+    description: "Field notes on agent frameworks and Personal OS design.",
+    icon: BookOpen,
+    locked: false,
+    external: false,
+  },
+  {
+    href: "https://business-ideas.vercel.app",
+    eyebrow: "Workspace",
+    title: "Dealflow Studio",
+    description: "Acquisition + investment pipeline. Lender readiness, deal scoring.",
+    icon: Briefcase,
+    locked: false,
+    external: true,
+  },
+];
 
 const featuredCallouts = [
   {
@@ -65,6 +95,59 @@ export default function Home() {
         primaryCta={{ href: "#projects", label: "See the projects" }}
         secondaryCta={{ href: "#contact", label: "Get in touch" }}
       />
+
+      <section className="border-b border-[var(--border)] bg-[var(--paper)]">
+        <div className="mx-auto max-w-6xl px-6 py-10">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {quickLinks.map((q, i) => {
+              const Icon = q.icon;
+              const linkProps = q.external
+                ? { target: "_blank", rel: "noopener noreferrer" as const }
+                : {};
+              return (
+                <FadeIn key={q.title} delay={i * 70}>
+                  <Link
+                    href={q.href}
+                    {...linkProps}
+                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--paper)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-bright)]/60 hover:shadow-[var(--card-shadow)]"
+                  >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(120%_60%_at_50%_0%,var(--card-glow),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    />
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[var(--accent)]">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--muted-soft)]">
+                          {q.eyebrow}
+                        </p>
+                      </div>
+                      {q.locked && (
+                        <Lock
+                          aria-label="Password protected"
+                          className="h-3.5 w-3.5 text-[var(--accent)]"
+                        />
+                      )}
+                    </div>
+                    <h3 className="mt-4 text-lg font-medium text-[var(--foreground)]">
+                      {q.title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
+                      {q.description}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] transition group-hover:text-[var(--accent-bright)]">
+                      Open
+                      <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+                    </span>
+                  </Link>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       <StatStrip
         stats={[
