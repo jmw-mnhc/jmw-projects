@@ -50,8 +50,7 @@ const PRIMARY = [
     accent: false,
   },
   {
-    // Auto-unlocks via shared password — no second sign-in.
-    href: "https://business-ideas.vercel.app/api/unlock?key=jmwprojects&from=/",
+    href: "https://business-ideas.vercel.app",
     icon: Briefcase,
     eyebrow: "Workspace",
     title: "Dealflow Studio",
