@@ -115,7 +115,7 @@ export const projects: Project[] = [
     status: "building",
     category: "Personal studio",
     stack: ["Next.js 16", "React 19", "Tailwind 4"],
-    href: "https://business-ideas.vercel.app",
+    href: "https://business-ideas.vercel.app/api/unlock?key=jmwprojects&from=/",
     featured: true,
     private: true,
   },

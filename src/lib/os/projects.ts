@@ -98,7 +98,7 @@ export const PROJECTS: ProjectMeta[] = [
     name: "Business Acquisition Search",
     shortName: "Business Ideas",
     reportsPath: reports("business-ideas"),
-    vercelUrl: "https://business-ideas.vercel.app",
+    vercelUrl: "https://business-ideas.vercel.app/api/unlock?key=jmwprojects&from=/",
     color: "rose",
     hex: "#f43f5e",
     accentText: "text-rose-700 dark:text-rose-300",
