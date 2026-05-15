@@ -50,7 +50,7 @@ const PRIMARY = [
     accent: false,
   },
   {
-    href: "https://business-ideas.vercel.app",
+    href: "https://business-ideas-virid.vercel.app",
     icon: Briefcase,
     eyebrow: "Workspace",
     title: "Dealflow Studio",
