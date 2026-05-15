@@ -37,7 +37,7 @@ const quickLinks = [
     external: false,
   },
   {
-    href: "https://business-ideas-virid.vercel.app",
+    href: "https://constellationjmw.vercel.app",
     eyebrow: "Workspace",
     title: "Dealflow Studio",
     description: "Acquisition + investment pipeline. Lender readiness, deal scoring.",
